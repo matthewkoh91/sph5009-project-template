@@ -9,12 +9,20 @@ library(tidyverse)
 outdir = "output/analysis"
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
-# Import cleaned data
-source("scripts/data/import/import_data.R")
+# Import processed data
+data_clean = read_csv("data/processed/dummy.csv")
 
-# Do some analysis
-model = lm(value ~ category, data = data_clean)
-summary_table = summary(model)
+# Summarise age by age group
+summary_table = data_clean %>%
+  group_by(age_group) %>%
+  summarise(
+    n = n(),
+    mean_age = mean(age),
+    .groups = "drop"
+  )
 
-# Write output to file
-capture.output(summary_table, file = file.path(outdir, "model_summary.txt"))
+# Save results
+write_csv(
+  summary_table,
+  file.path(outdir, "age_summary.csv")
+)

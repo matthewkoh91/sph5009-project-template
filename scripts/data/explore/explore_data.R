@@ -9,14 +9,14 @@ outdir = "output/explore"
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
 # Import cleaned data
-source("scripts/data/import/import_data.R")
+data_clean = read_csv("data/processed/dummy.csv")
 
 data_clean %>%
   print()
 
-g = 
-    ggplot(data_clean, aes(x = category, y = value)) +
-    geom_boxplot()
+g =
+  ggplot(data_clean, aes(x = age_group, y = age)) +
+  geom_boxplot()
 ggsave(g
     , filename = file.path(outdir, 'boxplot.pdf')
 )

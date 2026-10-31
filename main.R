@@ -11,6 +11,7 @@
 
 # 1. Process / clean
 source("scripts/data/process/process_data.R")
+source("scripts/data/process/add_age_group.R")
 
 # 2. Explore
 source("scripts/data/explore/explore_data.R")
